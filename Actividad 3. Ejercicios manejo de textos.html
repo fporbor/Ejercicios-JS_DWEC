@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Actividad 3. Ejercicios manejo de textos</title>
+    </head>
+    <body>
+        <h3 id="ej1"></h3>
+        <h3 id="ej2"></h3>
+        <h3 id="ej3"></h3>
+        <h3 id="ej4"></h3>
+        <h3 id="ej5"></h3>
+        <h3 id="ej6"></h3>
+        <h3 id="ej7"></h3>
+        <script>
+            /*Invertir una cadena. Usar una función a la que se le pase un texto como
+            parámetro. Usar un bucle for.*/
+            const frase = "Hola caracola";
+            function invertir(x){
+                let res = "";
+                for(let i = x.length;i>0;i--){
+                    res += x[i-1];
+                }
+                return res;
+            }
+            document.getElementById("ej1").innerHTML = invertir(frase);
+            /*Contar cuántas veces aparece una letra en un texto como parámetro.Usar un bucle for.*/
+            function contar(x,texto){
+                let res = 0;
+                for (let i = 0;i<texto.length;i++){
+                    if (x.toLowerCase() == texto[i]){
+                        res++;
+                    }
+                }
+                return `La letra ${x} aparece: ${res}`;
+            }
+            document.getElementById("ej2").innerHTML= contar("a",frase);
+            /*Detectar si un texto es un palíndromo. Un palíndromo es una palabra o
+              frase que suena igual leyéndola hacia adelante que hacia atrás (de manera
+              invertida, comenzando desde la última letra de la frase). Usar una función
+              a la que se le pase un texto como parámetro.*/
+            let pal = "Hola aloh"
+            function palindromo(x){
+                let cor = 0;
+                if (x.length%2 == 1){
+                    cor = 0.5
+                }
+                let res = 0;
+                for(let i = 0, j = (x.length - 1); j > i;j--,i++){
+                    if (x[i].toLowerCase() == x[j].toLowerCase()){
+                        res++;
+                    }
+                }
+                return res == ((x.length/2)-cor);
+            }
+            document.getElementById("ej3").innerHTML = `¿Es palindromo? ${palindromo(pal)}`;
+            /*Contar las vocales en un texto. Usar una función a la que se le pase un
+              texto como parámetro. Usar un bucle for*/
+            function contarvocales(x){
+                let res = 0;
+                const vocales = ["a","e","u","i","o"];
+                for (let i = 0; i<x.length;i++){
+                    if(vocales.includes(x[i].toLowerCase())){
+                        res++;
+                    }
+                }
+                return res;
+            }
+            document.getElementById("ej4").innerHTML = `El texto contiene ${contarvocales(pal)} vocales`;
+            /*Reemplazar una palabra en una frase. Usar una función a la que se le
+              pase un texto como parámetro. Usar un bucle for*/
+            function reemplazar(texto,cambio,nueva){
+                for (let i = 0;i<texto.length;i++){
+                    let res = "";
+                    for(let j = 0;j<cambio.length;j++){
+                        res += texto[i+j];
+                        if (res == cambio){
+                            return texto.slice(0,i) + nueva + texto.slice(j+i,texto.length-1);
+                        }
+                    }
+                }
+                return texto;
+            }
+            document.getElementById("ej5").innerHTML = reemplazar(pal,"aloh","Marta");
+            /*Poner en mayúscula la primera letra de cada palabra. Usar una función a
+              la que se le pase un texto como parámetro. Usar un bucle for*/
+            let prueba = "hola, eres nuevo"
+            function mayus(x){
+                let res = "";
+                res = x[0].toUpperCase();
+                for (let i = 1; i<x.length;i++){
+                    if (x[i-1] == " "){
+                        res += x[i].toUpperCase();
+                    }
+                    else {
+                        res += x[i];
+                    }
+                }
+                return res;
+            }
+            document.getElementById("ej6").innerHTML = mayus(prueba);
+            /*Contar cuántas veces una letra aparece en una palabra usando charAt().
+              Usar una función a la que se le pase un texto como parámetro. Usar un bucle for*/
+            function contarletra(x,frase){
+                let res = 0;
+                for (let i = 0; i<frase.length;i++){
+                    if(x.toLowerCase() == frase.charAt(i).toLowerCase()){
+                        res++;
+                    }
+                }
+                return res;
+            }
+            document.getElementById("ej7").innerHTML = `Aparece: ${contarletra("a",pal)}`;
+        </script>
+    </body>
+</html>
