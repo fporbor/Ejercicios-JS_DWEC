@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Actividad 2. Ejercicios JS Arrays</title>
+    </head>
+    <body>
+        <h3 id="ej1"></h3>
+        <h3 id="ej3"></h3>
+        <h3 id="ej4"></h3>
+        <h3 id="ej5"></h3>
+        <h3 id="ej6"></h3>
+        <h3 id="ej7"></h3>
+        <h3 id="ej8"></h3>
+        <h3 id="ej9"></h3>
+        <h3 id="ej10"></h3>
+        <script>
+            /*En este script deberás crear un array para guardar los nombres de los días de la semana,
+              empezando por 0 para el domingo. Para comprobar el funcionamiento pide al usuario un
+              número entre 0 y 6 y devuelve el nombre del día. Se supone que el dato tecleado estará
+              entre 0 y 6. */
+            const dias = ["Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado"];
+            let numero = prompt("Dime el numero del dia de la semana(1-7)(Domingo-Sabado): ");
+            document.getElementById("ej1").innerHTML = "El dia de la semana es el: " + dias[numero-1];
+              /*Crea un array booleano con dos valores 'verdadero' y 'falso'. Este array te sirve para
+                traduicr los valores true y false. Usalo para que el script muestre un alert con el nombre
+                vedadero si un usuario teclea un valor entre 0 y 9 y falso en el caso contrario.*/
+            const bool = [true, false];
+            let num = parseInt(prompt("Dime un numero entre el 0 y el 9: "))
+            function entre0_9(x){
+                if(x>= 0 && x<=9){
+                    alert("El numero es correcto");
+                }
+                else{
+                    alert("El numero no esta entre 0 y 9");
+                }
+            }
+            entre0_9(num);
+              /*Sin usar métodos del objeto array, diseña una función llamada sumaLista() capaz de
+                sumar todos los números que forman el array que se le pase como argumento.*/
+            const numeros = [1,2,3,4,5,6,7,8,9];
+            function sumLista(x){
+                let res = 0;
+                for(let i = 0;x.length>i;i++){
+                    res += x[i];
+                }
+                return res;
+            }
+            document.getElementById("ej3").innerHTML = `La suma del array  [${numeros}] es: ${sumLista(numeros)}`;
+              /*Diseña un script que vaya leyendo números y guardándolos en un array. Una vez lleno
+                mostrará el array y deberá decir cuántos números son pares y cuantos son impares. La
+                entrada de datos termina cuando el usuario teclea 0 o un valor no numérico.*/
+            let tanque = [];
+            let i = 0;
+            let pares = 0;
+            let impares = 0;
+            while (true){
+                let valor = prompt("Dime un valor, si es 0 o no numerico salimos");
+                if (isNaN(valor) || valor == "0"){
+                    document.getElementById("ej4").innerHTML = `El array [${tanque}], contiene ${pares} pares y ${impares} impares`;
+                    break;
+                }
+                else {
+                    tanque[i++] = parseInt(valor);
+                    if (parseInt(valor) % 2 == 0){
+                        pares++;
+                    }
+                    else {
+                        impares++;
+                    }
+                }
+                 
+            }
+              /*Escribe una función que pueda devolver el valor más pequeño de un array numérico o el
+                índice de ese valor. El segundo parámetro de la función dirá si debe devolver el valor ("v") o
+                el índice ("i"). No uses métodos del objeto array.*/
+            function min(x,valor){
+                let res = x[0];
+                let ref = "valor";
+                if (valor == "i"){
+                    res = 0;
+                    ref = "indice";
+                }
+                for(let i = 1;i<x.length;i++){
+                    if (res>x[i] && valor == "v"){
+                        res = x[i];
+                    }
+                    else if(x[res]>x[i] && valor == "i"){
+                        res = i;
+                    }
+                }
+                return `El ${ref} más pequeño es: ${res}`;
+            }
+            document.getElementById("ej5").innerHTML = min([5,2,3],"i");
+              /*Escribe una función que determina si la letra que se le pasa como argumento se
+                encuentra contenida dentro de un array de letras que se le pasa como segundo argumento.
+                Se trata de resolverlo sin usar métodos del objeto array, solo el dato tipo array.*/
+            function saberletra(x,array){
+                let res = 0;
+                for (let i = 0;i<array.length;i++){
+                    if(x == array[i]){
+                        res++;
+                    }
+                }
+                return `¿La letra ${x} se encuentra en el array? ${res > 0}`;
+            }
+            document.getElementById("ej6").innerHTML = saberletra("d",["b","a","c"]);
+              /*En este ejercicio debes crear una función que reciba como argumento una letra y
+                devuelva verdadero o falso (tru o false) dependiendo de si es una vocal o no. Debe funcionar
+                igual con mayúsculas y con minúsculas y por supuesto usando arrays. Solo se aceptan
+                letras internacionales (sin acentos).*/
+            function esVocal(x){
+                const vocales =["a","e","i","o","u"];
+                let res = 0;
+                for (let i = 0; i < vocales.length;i++){
+                    if (x.toLowerCase() == vocales[i]){
+                        res++;
+                    }
+                }
+                return `¿La letra ${x} es vocal? ${res > 0}`;
+            }
+            document.getElementById("ej7").innerHTML = esVocal("U");
+              /*Escribe una función que reciba como argumento un array y que devuelva una cadena de
+                caracteres formada por los elementos del array separados por un guión*/
+            function listar(x){
+                let res = x[0];
+                for (let i = 1;i<x.length;i++){
+                    res += "-";
+                    res += x[i];
+                }
+                return res
+            }
+            document.getElementById("ej8").innerHTML = listar(["rojo", "verde", "azul"]);
+              /*Crea una función que responda con el nombre de la persona encargada del servicio
+                sabiendo el día. Si el día no existe deberá decir que no hay servicio. Los nombres de los días
+                deben ir en minúsculas*/
+              function ser(x){
+                const servicio = ["Lunes-María", "Martes-Luis", "Miércoles-Antonia", "Jueves-Pedro", "Viernes-Marisa"]
+                let dias = [];
+                for (let i = 0;i<servicio.length;i++){
+                    let partes = servicio[i].split("-");
+                    dias[i] = partes [0];
+                }
+                for (let j = 0;j<dias.length;j++){
+                    if(x.toLowerCase() == dias[j].toLowerCase()){
+                        partes = servicio[j].split("-")
+                        return `Este día se encarga ${partes[1]}`
+                    }
+                    
+                }
+                return `Este día no esta disponible`
+              }
+              document.getElementById("ej9").innerHTML = ser("lunes");
+              /*Una tienda vende monitores, teclados y ratones. Los precios se almacenan en una
+                estructura array conde cada elemento es un par producto - precio.
+
+                Diseña una función que reciba como argumento el nombre de un producto (minúscula) y
+                devuelva su precio.*/
+
+                function producto(x){
+                    const productopr = ["monitor: 200€", "teclado: 20€", "ratón: 10€"];
+                    let productos = [];
+                    for(let i = 0; i<productopr.length;i++){
+                        let partes = productopr[i].split(": ");
+                        productos[i] = partes[0].toLowerCase();
+                    }
+                    for (let j = 0; j<productos.length;j++){
+                        if (x.toLowerCase() == productos[j]){
+                            partes = productopr[j].split(": ");
+                            return `El producto ${x} vale: ${partes[1]}`;
+                        }
+                    }
+                    return "Producto no encontrado";
+                }
+                document.getElementById("ej10").innerHTML = producto("monitor");
+        </script>
+    </body>
+</html>
